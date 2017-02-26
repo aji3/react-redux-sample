@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 /* Action Creatorのインポート */
 import { addText, clearText } from './actions'
 
+import {InfoTile, HeaderBar, NavigationMenu   } from 'adminlte-reactjs'
+
 /*
   View (Reactコンポーネント):
   ユーザーの操作などを受けて dispatch() メソッドで Action Creator (./actions.jsからインポートした addText(), clearText()メソッドなど) を呼び出して、Storeにデータの変更 (stateの変更) を伝播させる
@@ -17,19 +19,33 @@ class App extends Component {
     render() {
         return (
             <div>
-                <input type='text' ref='input' /><br/>
-                <button onClick={(e) => this.onAddBtnClicked(e)}   >Add</button>
-                <button onClick={(e) => this.onClearBtnClicked(e)} >Clear</button>
-                <ul>
-                  {
-                    //state中のオブジェクトをループさせて<li>要素を描画。stateは selector() メソッドで指定しているものがpropsとして渡ってくる
-                    this.props.state.storedText.map((obj) =>
-                      <li key={obj.id} >
-                        {obj.text}
-                      </li>
-                    )
-                  }
-                </ul>
+              <HeaderBar></HeaderBar>
+              <NavigationMenu></NavigationMenu>
+              <div className='content-wrapper'>
+                <section className='content' id="widgets-container">
+
+                  <input type='text' ref='input' /><br/>
+                  <button onClick={(e) => this.onAddBtnClicked(e)}   >Add</button>
+                  <button onClick={(e) => this.onClearBtnClicked(e)} >Clear</button>
+                  <ul>
+                    {
+                      //state中のオブジェクトをループさせて<li>要素を描画。stateは selector() メソッドで指定しているものがpropsとして渡ってくる
+                      this.props.state.storedText.map((obj) =>
+                        <li key={obj.id} >
+                          {obj.text}
+                        </li>
+                      )
+                    }
+                  </ul>
+                  <InfoTile width='3' content = ''
+                  icon = 'fa-envelope-o'
+                  stats = '1,410'
+                  subject = 'Messages'
+                  theme = 'bg-aqua'
+                  />
+
+              </section>
+              </div>
             </div>
         )
     }
