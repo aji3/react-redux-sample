@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 /* Action Creatorのインポート */
 import { addText, clearText } from './actions'
 
-import {InfoTile, HeaderBar, NavigationMenu   } from 'adminlte-reactjs'
+import {InfoTile, HeaderBar, NavigationMenu, CustomBox } from 'adminlte-reactjs'
 
 /*
   View (Reactコンポーネント):
@@ -24,25 +24,32 @@ class App extends Component {
               <div className='content-wrapper'>
                 <section className='content' id="widgets-container">
 
-                  <input type='text' ref='input' /><br/>
-                  <button onClick={(e) => this.onAddBtnClicked(e)}   >Add</button>
-                  <button onClick={(e) => this.onClearBtnClicked(e)} >Clear</button>
-                  <ul>
-                    {
-                      //state中のオブジェクトをループさせて<li>要素を描画。stateは selector() メソッドで指定しているものがpropsとして渡ってくる
-                      this.props.state.storedText.map((obj) =>
-                        <li key={obj.id} >
-                          {obj.text}
-                        </li>
-                      )
-                    }
-                  </ul>
                   <InfoTile width='3' content = ''
                   icon = 'fa-envelope-o'
                   stats = '1,410'
                   subject = 'Messages'
                   theme = 'bg-aqua'
                   />
+                  <CustomBox
+                      width = '12'
+                      content = ''
+                      theme = 'box-default'
+                      title = 'Expandable'>
+
+                      <input type='text' ref='input' /><br/>
+                      <button onClick={(e) => this.onAddBtnClicked(e)}   >Add</button>
+                      <button onClick={(e) => this.onClearBtnClicked(e)} >Clear</button>
+                      <ul>
+                        {
+                          //state中のオブジェクトをループさせて<li>要素を描画。stateは selector() メソッドで指定しているものがpropsとして渡ってくる
+                          this.props.state.storedText.map((obj) =>
+                            <li key={obj.id} >
+                              {obj.text}
+                            </li>
+                          )
+                        }
+                      </ul>
+                </CustomBox>
 
               </section>
               </div>
